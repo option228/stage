@@ -1,2 +1,0 @@
-# stage
-recherche de stage

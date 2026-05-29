@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Tramoy — Portfolio TSSR</title>
+<meta name="description" content="Lucas Tramoy, Étudiant TSSR — Systèmes, Réseaux, Support IT.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p3-deep: #000d1a;
+  --p3-dark: #001428;
+  --p3-bright: #0047a0;
+  --p3-light: #0066cc;
+  --p3-glow: #1a8fff;
+  --p3-cyan: #00d4ff;
+  --p3-cyan-dim: #0099cc;
+  --p3-white: #e8f4ff;
+  --p3-dim: #a0c4e0;
+  --p3-accent: #4db8ff;
+  --p3-accent-b: #80ccff;
+  --p3-gold: #ffd700;
+  --p3-green: #00ff88;
+  --font-d: 'Exo 2', sans-serif;
+  --font-b: 'Rajdhani', sans-serif;
+  --font-m: 'Share Tech Mono', monospace;
+  --xs: clamp(0.7rem,0.65rem + 0.2vw,0.82rem);
+  --sm: clamp(0.85rem,0.8rem + 0.25vw,1rem);
+  --base: clamp(1rem,0.95rem + 0.2vw,1.1rem);
+  --lg: clamp(1.15rem,1.05rem + 0.5vw,1.45rem);
+  --xl: clamp(1.5rem,1.2rem + 1vw,2.1rem);
+  --2xl: clamp(2rem,1.5rem + 2vw,3.2rem);
+  --hero: clamp(3rem,2rem + 3vw,5.5rem);
+  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s6:1.5rem;--s8:2rem;--s12:3rem;--s16:4rem;--s20:5rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{min-height:100dvh;font-family:var(--font-b);font-size:var(--base);color:var(--p3-white);background:var(--p3-deep);overflow-x:hidden}
+
+/* ===== BACKGROUND ===== */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,100,200,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,200,.07) 1px,transparent 1px);
+  background-size:40px 40px;animation:gridMove 25s linear infinite}
+@keyframes gridMove{to{background-position:40px 40px}}
+.bg-g1{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(0,80,180,.18) 0%,transparent 70%);top:-200px;left:-200px;animation:gf 10s ease-in-out infinite}
+.bg-g2{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(0,160,255,.12) 0%,transparent 70%);bottom:-100px;right:-100px;animation:gf 14s ease-in-out infinite reverse}
+@keyframes gf{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,25px)}}
+.bg-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,100,200,.015) 3px,rgba(0,100,200,.015) 4px)}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:var(--s3) var(--s8);display:flex;align-items:center;justify-content:space-between;background:rgba(0,8,20,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,150,220,.35)}
+nav::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p3-cyan),var(--p3-glow),var(--p3-cyan),transparent);animation:ng 3s ease-in-out infinite}
+@keyframes ng{0%,100%{opacity:.5}50%{opacity:1}}
+.logo{font-family:var(--font-d);font-size:var(--lg);font-weight:900;letter-spacing:.15em;color:var(--p3-white);text-decoration:none;text-transform:uppercase}
+.logo span{color:var(--p3-cyan);font-weight:400}
+.nav-links{display:flex;gap:var(--s1);list-style:none}
+.nav-links a{font-family:var(--font-d);font-size:var(--sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--p3-dim);text-decoration:none;padding:var(--s2) var(--s4);position:relative;transition:color .2s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.nav-links a::before{content:'';position:absolute;inset:0;background:rgba(0,150,220,.15);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);opacity:0;transition:opacity .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--p3-cyan)}
+.nav-links a:hover::before,.nav-links a.active::before{opacity:1}
+
+/* ===== LAYOUT ===== */
+main{position:relative;z-index:1;padding-top:64px}
+section{position:relative;padding:var(--s20) var(--s8)}
+.container{max-width:1100px;margin-inline:auto;width:100%}
+
+/* ===== SECTION LABEL ===== */
+.sec-label{font-family:var(--font-m);font-size:var(--xs);letter-spacing:.3em;text-transform:uppercase;color:var(--p3-cyan);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)}
+.sec-label::before{content:'';width:40px;height:1px;background:var(--p3-cyan);box-shadow:0 0 8px var(--p3-cyan)}
+.sec-label::after{content:'';width:80px;height:1px;background:linear-gradient(90deg,var(--p3-cyan-dim),transparent)}
+.sec-title{font-family:var(--font-d);font-size:var(--2xl);font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--p3-white);margin-bottom:var(--s12);position:relative;display:inline-block}
+.sec-title::after{content:'';position:absolute;bottom:-8px;left:0;width:60px;height:3px;background:linear-gradient(90deg,var(--p3-cyan),transparent);box-shadow:0 0 8px var(--p3-cyan)}
+
+/* ===== PANEL ===== */
+.panel{background:rgba(0,20,50,.85);border:1px solid rgba(0,150,220,.5);position:relative;padding:var(--s6);backdrop-filter:blur(8px)}
+.panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p3-cyan),var(--p3-glow),transparent)}
+.corner{position:absolute;width:16px;height:16px;border-color:var(--p3-cyan);border-style:solid}
+.corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+
+/* ===== DIVIDER ===== */
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,150,220,.4),var(--p3-cyan),rgba(0,150,220,.4),transparent);position:relative}
+.divider::after{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--p3-cyan);font-size:8px;background:var(--p3-deep);padding:0 var(--s3)}
+
+/* ===== BTN ===== */
+.btn{display:inline-flex;align-items:center;gap:var(--s2);font-family:var(--font-d);font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;padding:var(--s3) var(--s8);transition:all .2s;clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%);min-height:48px;border:none;cursor:pointer}
+.btn-p{background:linear-gradient(135deg,var(--p3-bright),var(--p3-light));color:var(--p3-white);box-shadow:0 0 20px rgba(0,100,200,.4)}
+.btn-p:hover{background:linear-gradient(135deg,var(--p3-light),var(--p3-glow));box-shadow:0 0 30px rgba(0,150,255,.6);transform:translateY(-2px)}
+.btn-s{background:transparent;color:var(--p3-cyan);border:1px solid rgba(0,212,255,.5)}
+.btn-s:hover{background:rgba(0,212,255,.1);box-shadow:0 0 20px rgba(0,212,255,.2);transform:translateY(-2px)}
+
+/* ===== HERO ===== */
+#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hero-ready{display:inline-flex;align-items:center;gap:var(--s2);font-family:var(--font-m);font-size:var(--xs);letter-spacing:.2em;text-transform:uppercase;color:var(--p3-green);background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.35);padding:var(--s2) var(--s4);clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);margin-bottom:var(--s6);animation:rp 2.5s ease-in-out infinite}
+@keyframes rp{0%,100%{border-color:rgba(0,255,136,.35)}50%{border-color:rgba(0,255,136,.7);box-shadow:0 0 14px rgba(0,255,136,.2)}}
+.ready-dot{width:7px;height:7px;background:var(--p3-green);border-radius:50%;box-shadow:0 0 8px var(--p3-green);animation:blink 1.8s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-name{font-family:var(--font-d);font-size:var(--hero);font-weight:900;line-height:.9;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:var(--s4)}
+.hero-name-line{display:block;overflow:hidden}
+.hero-name-line span{display:block;animation:hin .8s cubic-bezier(.16,1,.3,1) both}
+.hero-name-line:nth-child(2) span{color:var(--p3-cyan);text-shadow:0 0 40px rgba(0,212,255,.5);animation-delay:.1s}
+@keyframes hin{from{transform:translateY(110%)}to{transform:translateY(0)}}
+.hero-sub{font-family:var(--font-d);font-size:var(--xl);font-weight:300;letter-spacing:.1em;color:var(--p3-dim);margin-bottom:var(--s4);animation:fu .8s .3s cubic-bezier(.16,1,.3,1) both}
+.hero-sub strong{color:var(--p3-accent-b);font-weight:700}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-tags{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s8);animation:fu .8s .4s cubic-bezier(.16,1,.3,1) both}
+.htag{font-family:var(--font-m);font-size:var(--xs);letter-spacing:.15em;color:var(--p3-accent);border:1px solid rgba(77,184,255,.35);padding:var(--s1) var(--s3);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);background:rgba(0,100,200,.12)}
+.hero-cta{display:flex;gap:var(--s4);flex-wrap:wrap;animation:fu .8s .55s cubic-bezier(.16,1,.3,1) both}
+.hero-vbar{position:absolute;right:60px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:var(--s3);align-items:center;animation:fu 1s .8s ease both}
+.vline{width:1px;height:80px;background:linear-gradient(180deg,transparent,var(--p3-cyan),transparent)}
+.vtext{font-family:var(--font-m);font-size:10px;letter-spacing:.3em;color:var(--p3-cyan-dim);writing-mode:vertical-rl;text-transform:uppercase}
+.hero-moon{position:absolute;right:120px;top:50%;transform:translateY(-50%);width:200px;height:200px;opacity:.06;pointer-events:none;animation:spin 25s linear infinite}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:280px 1fr;gap:var(--s8);align-items:start}
+.about-sticky{position:sticky;top:80px}
+.avatar-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:var(--s4)}
+.avatar{width:140px;height:140px;background:linear-gradient(135deg,var(--p3-bright),var(--p3-glow));clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:var(--2xl);font-weight:900;animation:hp 3s ease-in-out infinite}
+@keyframes hp{0%,100%{box-shadow:0 0 40px rgba(0,100,255,.5)}50%{box-shadow:0 0 60px rgba(0,150,255,.8)}}
+.meta-list{display:flex;flex-direction:column;gap:var(--s2)}
+.meta-row{display:flex;align-items:center;gap:var(--s3);font-family:var(--font-m);font-size:var(--xs);color:var(--p3-dim);padding:var(--s2) var(--s3);border-left:2px solid rgba(0,150,220,.3)}
+.meta-row span:first-child{color:var(--p3-cyan);font-weight:600;min-width:80px}
+.about-body{display:flex;flex-direction:column;gap:var(--s6)}
+.bio{font-size:var(--base);line-height:1.85;color:var(--p3-dim)}
+.bio strong{color:var(--p3-accent-b)}
+.traits{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.trait{font-family:var(--font-d);font-size:var(--xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--p3-accent);padding:var(--s1) var(--s4);border:1px solid rgba(0,150,220,.4);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);background:rgba(0,80,160,.2);transition:all .2s;cursor:default}
+.trait:hover{background:rgba(0,120,200,.3);color:var(--p3-cyan)}
+
+/* ===== SKILLS ===== */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}
+.skill-cat{padding:var(--s6);background:rgba(0,20,50,.8);border:1px solid rgba(0,150,220,.3);position:relative;transition:border-color .2s,box-shadow .2s}
+.skill-cat::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--p3-cyan),transparent)}
+.skill-cat::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--p3-cyan),transparent)}
+.skill-cat:hover{border-color:rgba(0,212,255,.5);box-shadow:0 0 20px rgba(0,150,220,.1)}
+.cat-icon{font-size:1.5rem;margin-bottom:var(--s2)}
+.cat-title{font-family:var(--font-d);font-size:var(--sm);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--p3-cyan);margin-bottom:var(--s4)}
+.stags{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.stag{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-dim);padding:var(--s1) var(--s3);background:rgba(0,60,120,.4);border:1px solid rgba(0,120,200,.25);transition:all .15s;cursor:default}
+.stag:hover{color:var(--p3-cyan);border-color:rgba(0,212,255,.4)}
+
+/* ===== EXPERIENCE ===== */
+.exp-list{display:flex;flex-direction:column;gap:var(--s8)}
+.exp-item{display:grid;grid-template-columns:160px 1fr;column-gap:var(--s8);position:relative;align-items:start}
+.exp-item::before{content:'';position:absolute;left:160px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--p3-cyan),rgba(0,150,220,.1))}
+.exp-time{text-align:right;padding-right:var(--s8);padding-top:var(--s1)}
+.exp-dur{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-cyan);display:block;margin-bottom:var(--s1)}
+.exp-per{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-dim);opacity:.6}
+.exp-dot{position:absolute;left:calc(160px - 5px);top:8px;width:10px;height:10px;background:var(--p3-cyan);border:2px solid var(--p3-deep);transform:rotate(45deg);box-shadow:0 0 10px var(--p3-cyan)}
+.exp-content{padding-left:var(--s8);padding-bottom:0;min-width:0}
+.exp-co{font-family:var(--font-d);font-size:var(--lg);font-weight:700;color:var(--p3-white);margin-bottom:var(--s1);line-height:1.2}
+.exp-role{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:var(--s4);line-height:1.5}
+.exp-ul{list-style:none;display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s4)}
+.exp-ul li{font-size:var(--sm);color:var(--p3-dim);line-height:1.65;padding-left:var(--s4);position:relative}
+.exp-ul li::before{content:'▸';position:absolute;left:0;color:var(--p3-glow)}
+.exp-techs{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.etag{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-accent);padding:2px var(--s3);border:1px solid rgba(77,184,255,.3);background:rgba(0,80,160,.15);clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+
+/* ===== EDUCATION ===== */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6)}
+.edu-card{padding:var(--s6);background:rgba(0,20,50,.8);border:1px solid rgba(0,150,220,.3);position:relative;transition:all .2s}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--p3-glow),transparent)}
+.edu-card:hover{border-color:rgba(0,212,255,.4);box-shadow:0 0 20px rgba(0,150,220,.1)}
+.edu-badge{font-family:var(--font-m);font-size:var(--xs);letter-spacing:.2em;text-transform:uppercase;color:var(--p3-gold);display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s3)}
+.badge-dot{width:6px;height:6px;background:var(--p3-gold);box-shadow:0 0 6px var(--p3-gold);animation:blink 2s step-end infinite}
+.edu-title{font-family:var(--font-d);font-size:var(--lg);font-weight:700;color:var(--p3-white);margin-bottom:var(--s1)}
+.edu-school{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-cyan);letter-spacing:.12em;margin-bottom:var(--s3)}
+.edu-year{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-dim);opacity:.6;margin-bottom:var(--s3)}
+.edu-desc{font-size:var(--sm);color:var(--p3-dim);line-height:1.6}
+.stage-card{grid-column:1/-1;background:rgba(0,30,60,.9);border-color:rgba(0,212,255,.5);padding:var(--s8)}
+.stage-card::before{background:linear-gradient(90deg,var(--p3-cyan),var(--p3-glow),transparent)}
+.stage-hl{font-family:var(--font-d);font-size:var(--xl);font-weight:900;color:var(--p3-cyan);text-shadow:0 0 20px rgba(0,212,255,.4);margin-bottom:var(--s3)}
+.stage-sub{font-family:var(--font-m);font-size:var(--sm);color:var(--p3-green);margin-bottom:var(--s4)}
+.stage-desc{font-size:var(--base);color:var(--p3-dim);line-height:1.7;max-width:70ch;margin-bottom:var(--s6)}
+
+/* ===== CONTACT ===== */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8);align-items:center}
+.contact-h{font-family:var(--font-d);font-size:var(--2xl);font-weight:900;text-transform:uppercase;color:var(--p3-white);margin-bottom:var(--s4);line-height:1}
+.contact-h span{color:var(--p3-cyan)}
+.contact-p{font-size:var(--base);color:var(--p3-dim);line-height:1.7;margin-bottom:var(--s6)}
+.contact-links{display:flex;flex-direction:column;gap:var(--s3)}
+.clink{display:flex;align-items:center;gap:var(--s4);text-decoration:none;color:var(--p3-dim);font-family:var(--font-m);font-size:var(--sm);padding:var(--s4) var(--s6);background:rgba(0,20,50,.8);border:1px solid rgba(0,150,220,.3);position:relative;transition:all .2s;clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)}
+.clink::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--p3-cyan);transform:scaleY(0);transform-origin:bottom;transition:transform .2s}
+.clink:hover{color:var(--p3-cyan);border-color:rgba(0,212,255,.5);background:rgba(0,40,80,.8)}
+.clink:hover::before{transform:scaleY(1)}
+.clink-icon{font-size:1.2rem;min-width:24px;text-align:center;font-style:normal}
+.clink-label{font-size:var(--xs);color:var(--p3-cyan-dim);letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:2px}
+.clink-val{color:var(--p3-dim)}
+.clink:hover .clink-val{color:var(--p3-cyan)}
+.info-panel{padding:var(--s8);background:rgba(0,20,50,.8);border:1px solid rgba(0,150,220,.3);position:relative}
+.info-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p3-cyan),transparent)}
+.info-title{font-family:var(--font-m);font-size:var(--xs);letter-spacing:.3em;text-transform:uppercase;color:var(--p3-cyan);margin-bottom:var(--s4)}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:var(--s3) 0;border-bottom:1px solid rgba(0,150,220,.1);font-family:var(--font-m);font-size:var(--xs)}
+.info-row:last-child{border-bottom:none}
+.info-k{color:var(--p3-dim);opacity:.7}
+.info-v{color:var(--p3-accent-b);text-align:right}
+
+/* ===== FOOTER ===== */
+footer{position:relative;z-index:1;padding:var(--s6) var(--s8);border-top:1px solid rgba(0,150,220,.2);display:flex;align-items:center;justify-content:space-between;background:rgba(0,8,20,.8)}
+.ft{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-dim);opacity:.5;letter-spacing:.15em}
+.fp{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-cyan-dim);opacity:.4;letter-spacing:.2em;text-transform:uppercase}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  section{padding:var(--s16) var(--s4)}
+  nav{padding:var(--s3) var(--s4)}
+  .nav-links{display:none}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .about-sticky{position:static}
+  .skills-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr}
+  .exp-item::before,.exp-dot{display:none}
+  .exp-time{text-align:left;padding-right:0;margin-bottom:var(--s2)}
+  .exp-content{padding-left:0}
+  .edu-grid{grid-template-columns:1fr}
+  .stage-card{grid-column:1}
+  .hero-vbar,.hero-moon{display:none}
+  footer{flex-direction:column;gap:var(--s2);text-align:center}
+  .hero-cta{flex-direction:column}
+  .btn{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+
+/* FINAL FIX - desktop experience text wrapping */
+#experience .container{max-width:1400px}
+#experience .exp-list{display:flex;flex-direction:column;gap:var(--s8)}
+#experience .exp-item{display:grid;grid-template-columns:180px minmax(0,900px);column-gap:var(--s8);align-items:start}
+#experience .exp-item::before{left:180px}
+#experience .exp-dot{left:calc(180px - 5px)}
+#experience .exp-content{display:block;width:100%;min-width:0;max-width:900px;padding-left:var(--s8)}
+#experience .exp-co,#experience .exp-role,#experience .exp-ul,#experience .exp-ul li,#experience .exp-techs{max-width:100%;width:100%;writing-mode:horizontal-tb !important;text-orientation:mixed !important;transform:none !important;float:none !important;clear:both}
+#experience .exp-co{font-family:var(--font-b) !important;font-size:1.6rem !important;font-weight:700;color:var(--p3-white);margin-bottom:var(--s2);line-height:1.25;letter-spacing:normal !important;text-transform:none !important;white-space:normal !important;writing-mode:horizontal-tb !important;display:block;width:100%}
+#experience .exp-role{font-family:var(--font-b) !important;font-size:1rem !important;font-weight:600;color:var(--p3-cyan);margin-bottom:var(--s4);line-height:1.5;letter-spacing:.02em !important;text-transform:none !important;white-space:normal !important;writing-mode:horizontal-tb !important;display:block;width:100%}
+#experience .exp-ul{display:block !important;padding:0;margin:0 0 var(--s4) 0}
+#experience .exp-ul li{display:block !important;font-family:var(--font-b) !important;font-size:1rem !important;color:var(--p3-dim);line-height:1.75;padding-left:1.25rem;margin:0 0 .5rem 0;white-space:normal !important;word-break:normal !important;overflow-wrap:break-word !important;letter-spacing:normal !important;writing-mode:horizontal-tb !important;width:100%}
+#experience .exp-techs{display:flex !important;flex-wrap:wrap;gap:var(--s2)}
+@media(max-width:768px){
+  #experience .exp-item{grid-template-columns:1fr}
+  #experience .exp-item::before,#experience .exp-dot{display:none}
+  #experience .exp-time{text-align:left;padding-right:0;margin-bottom:var(--s2)}
+  #experience .exp-content{padding-left:0;max-width:none}
+}
+
+
+#experience *, #experience *::before, #experience *::after{
+  text-orientation:mixed !important;
+}
+#experience .exp-content *{
+  writing-mode:horizontal-tb !important;
+  max-inline-size:none !important;
+}
+
+
+.xp-cards{display:grid;gap:var(--s6)}
+.xp-card{padding:var(--s6)}
+.xp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s4);padding-bottom:var(--s4);border-bottom:1px solid rgba(0,150,220,.18)}
+.xp-company{font-family:var(--font-d);font-size:var(--lg);font-weight:700;color:var(--p3-white);line-height:1.2}
+.xp-role{font-family:var(--font-b);font-size:1rem;font-weight:600;color:var(--p3-cyan);line-height:1.4;margin-top:.35rem}
+.xp-meta{font-family:var(--font-m);font-size:var(--xs);color:var(--p3-accent-b);white-space:nowrap}
+.xp-list{list-style:none;display:grid;gap:var(--s2);margin:0 0 var(--s4) 0;padding:0}
+.xp-list li{font-family:var(--font-b);font-size:1rem;color:var(--p3-dim);line-height:1.7;padding-left:1.25rem;position:relative}
+.xp-list li::before{content:'▸';position:absolute;left:0;color:var(--p3-glow)}
+.xp-tags{display:flex;flex-wrap:wrap;gap:var(--s2)}
+@media(max-width:768px){.xp-head{flex-direction:column}.xp-meta{white-space:normal}}
+
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="bg-grid"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-g1"></div>
+  <div class="bg-g2"></div>
+</div>
+
+<nav>
+  <a href="#hero" class="logo"><span>[</span>LT<span>]</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" class="nl">À propos</a></li>
+    <li><a href="#skills" class="nl">Compétences</a></li>
+    <li><a href="#experience" class="nl">Expériences</a></li>
+    <li><a href="#education" class="nl">Formation</a></li>
+    <li><a href="#contact" class="nl">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-ready"><span class="ready-dot"></span>En recherche d'une alternance BAC+3</div>
+    <h1 class="hero-name">
+      <span class="hero-name-line"><span>Lucas</span></span>
+      <span class="hero-name-line"><span>Tramoy</span></span>
+    </h1>
+    <p class="hero-sub">Étudiant <strong>TSSR</strong> — Systèmes &amp; Réseaux</p>
+    <div class="hero-tags">
+      <span class="htag">Paris &amp; Île-de-France</span>
+      <span class="htag">20 ans</span>
+      <span class="htag">Clamart (92)</span>
+      <span class="htag">Disponible immédiatement</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:lucastramoycand@gmail.com" class="btn btn-p">✉ Envoyer un email</a>
+      <a href="https://www.linkedin.com/in/lucas-tramoy-814201309/" target="_blank" rel="noopener noreferrer" class="btn btn-s">⇗ LinkedIn</a>
+    </div>
+  </div>
+  <div class="hero-vbar">
+    <div class="vline"></div>
+    <span class="vtext">TSSR · 2025–2026</span>
+    <div class="vline"></div>
+  </div>
+  <svg class="hero-moon" viewBox="0 0 200 200" fill="none">
+    <circle cx="100" cy="100" r="90" stroke="#00d4ff" stroke-width="1"/>
+    <circle cx="100" cy="100" r="70" stroke="#00d4ff" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <circle cx="100" cy="100" r="50" stroke="#0099cc" stroke-width="1"/>
+    <line x1="100" y1="10" x2="100" y2="190" stroke="#00d4ff" stroke-width="0.5" opacity="0.5"/>
+    <line x1="10" y1="100" x2="190" y2="100" stroke="#00d4ff" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="100" cy="10" r="3" fill="#00d4ff"/>
+    <circle cx="100" cy="190" r="3" fill="#00d4ff"/>
+    <circle cx="10" cy="100" r="3" fill="#00d4ff"/>
+    <circle cx="190" cy="100" r="3" fill="#00d4ff"/>
+  </svg>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <span class="sec-label">01 / À propos</span>
+    <div class="about-grid">
+      <div class="about-sticky">
+        <div class="panel">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <div class="avatar-wrap"><div class="avatar">LT</div></div>
+          <div class="meta-list">
+            <div class="meta-row"><span>Localisation</span> Clamart, 92</div>
+            <div class="meta-row"><span>Âge</span> 20 ans</div>
+            <div class="meta-row"><span>Formation</span> TSSR en cours</div>
+            <div class="meta-row"><span>Mobilité</span> Mobile en IDF</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-body">
+        <div>
+          <h2 class="sec-title">Qui suis-je ?</h2>
+          <p class="bio">Je m'appelle <strong>Lucas Tramoy</strong>, j'ai 20 ans et je suis actuellement en formation <strong>TSSR (Technicien Supérieur Systèmes &amp; Réseaux)</strong> chez COS Formation à Paris.</p>
+          <br>
+          <p class="bio">L'informatique est une véritable passion : que ce soit la configuration d'un réseau, le diagnostic d'un poste défaillant ou l'administration d'un <strong>Active Directory</strong>, je suis dans mon élément. Deux expériences en entreprise m'ont permis de confirmer cette orientation et de développer de vraies compétences terrain.</p>
+          <br>
+          <p class="bio">Je suis sérieux, impliqué et à l'aise aussi bien dans un travail en équipe que de manière autonome. Je m'intègre rapidement dans un nouvel environnement professionnel.</p>
+        </div>
+        <div class="traits">
+          <span class="trait">Rigoureux</span>
+          <span class="trait">Autonome</span>
+          <span class="trait">Curieux</span>
+          <span class="trait">Adaptable</span>
+          <span class="trait">Analytique</span>
+          <span class="trait">Esprit d'équipe</span>
+          <span class="trait">Réactif</span>
+          <span class="trait">Fiable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="container">
+    <span class="sec-label">02 / Compétences</span>
+    <h2 class="sec-title">Compétences Techniques</h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="cat-icon">🖥️</div>
+        <div class="cat-title">Systèmes</div>
+        <div class="stags">
+          <span class="stag">Windows Server</span>
+          <span class="stag">Active Directory</span>
+          <span class="stag">GPO</span>
+          <span class="stag">DHCP / DNS</span>
+          <span class="stag">Linux</span>
+          <span class="stag">Windows 10/11</span>
+          <span class="stag">Virtualisation</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="cat-icon">🌐</div>
+        <div class="cat-title">Réseaux</div>
+        <div class="stags">
+          <span class="stag">Cisco</span>
+          <span class="stag">VLAN</span>
+          <span class="stag">VPN</span>
+          <span class="stag">TCP/IP</span>
+          <span class="stag">Routage &amp; Switching</span>
+          <span class="stag">Firewall</span>
+          <span class="stag">Wi-Fi</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="cat-icon">🔧</div>
+        <div class="cat-title">Support &amp; Hardware</div>
+        <div class="stags">
+          <span class="stag">Support N1 / N2</span>
+          <span class="stag">Diagnostic hardware</span>
+          <span class="stag">Réparation PC</span>
+          <span class="stag">Déploiement postes</span>
+          <span class="stag">Ticketing</span>
+          <span class="stag">Relation client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+  <div class="container">
+    <span class="sec-label">03 / Expériences</span>
+    <h2 class="sec-title">Parcours Professionnel</h2>
+    <div class="xp-cards">
+
+      <article class="xp-card panel">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="xp-head">
+          <div>
+            <div class="xp-company">🏠 Vallée Sud Habitat</div>
+            <div class="xp-role">Stagiaire Technicien Systèmes & Réseaux</div>
+          </div>
+          <div class="xp-meta">7 semaines · Stage Pro</div>
+        </div>
+        <ul class="xp-list">
+          <li>Administration Active Directory : création et gestion de comptes utilisateurs, groupes et unités d'organisation</li>
+          <li>Mise en place et modification de stratégies de groupe (GPO)</li>
+          <li>Support utilisateur niveaux 1 et 2 auprès des collaborateurs</li>
+          <li>Déploiement et configuration de postes de travail</li>
+          <li>Diagnostic et résolution de pannes matérielles et logicielles</li>
+          <li>Câblage réseau et interventions sur l'infrastructure</li>
+        </ul>
+        <div class="xp-tags">
+          <span class="etag">Active Directory</span>
+          <span class="etag">GPO</span>
+          <span class="etag">Support N1/N2</span>
+          <span class="etag">Déploiement</span>
+          <span class="etag">Windows</span>
+          <span class="etag">Réseaux</span>
+        </div>
+      </article>
+
+      <article class="xp-card panel">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="xp-head">
+          <div>
+            <div class="xp-company">🏢 Servier — DSI</div>
+            <div class="xp-role">Stagiaire Technicien IT</div>
+          </div>
+          <div class="xp-meta">6 semaines · Stage Pro</div>
+        </div>
+        <ul class="xp-list">
+          <li>Support utilisateur niveaux 1 et 2 auprès des collaborateurs du groupe pharmaceutique</li>
+          <li>Déploiement et configuration de postes de travail</li>
+          <li>Diagnostic et réparation de postes défaillants (hardware & logiciel)</li>
+          <li>Gestion de comptes et droits dans Active Directory</li>
+        </ul>
+        <div class="xp-tags">
+          <span class="etag">Active Directory</span>
+          <span class="etag">Windows</span>
+          <span class="etag">Support N1/N2</span>
+          <span class="etag">Déploiement</span>
+          <span class="etag">DSI</span>
+        </div>
+      </article>
+
+      <article class="xp-card panel">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="xp-head">
+          <div>
+            <div class="xp-company">🔧 TTSystèmes</div>
+            <div class="xp-role">Technicien en Réparation Informatique</div>
+          </div>
+          <div class="xp-meta">8 semaines · Stage Pro</div>
+        </div>
+        <ul class="xp-list">
+          <li>Diagnostic et réparation de matériels informatiques défaillants (hardware & logiciel)</li>
+          <li>Accueil et relation client directe : prise en charge, conseil technique et restitution</li>
+          <li>Réinstallation et configuration de systèmes d'exploitation</li>
+          <li>Remise en état de postes de travail, portables et périphériques</li>
+        </ul>
+        <div class="xp-tags">
+          <span class="etag">Réparation hardware</span>
+          <span class="etag">Diagnostic</span>
+          <span class="etag">Relation client</span>
+          <span class="etag">Windows / Linux</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+  <div class="container">
+    <span class="sec-label">04 / Formation</span>
+    <h2 class="sec-title">Parcours Scolaire</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="edu-badge"><span class="badge-dot"></span>En cours</div>
+        <div class="edu-title">🎓 TSSR — Technicien Supérieur Systèmes &amp; Réseaux</div>
+        <div class="edu-school">COS Formation · Paris</div>
+        <div class="edu-year">2025 – 2026</div>
+        <p class="edu-desc">Administration systèmes, infrastructure réseau, sécurité, virtualisation et services d'annuaire.</p>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-badge" style="color:var(--p3-dim)">
+          <span class="badge-dot" style="background:var(--p3-dim);box-shadow:none;animation:none"></span>Obtenu
+        </div>
+        <div class="edu-title">📜 Baccalauréat Systèmes Numériques</div>
+        <div class="edu-school">Filière SN</div>
+        <div class="edu-year">Obtenu en 2024</div>
+        <p class="edu-desc">Bac technologique orienté systèmes numériques, réseaux et informatique industrielle.</p>
+      </div>
+
+      <div class="edu-card stage-card">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <div class="edu-badge"><span class="badge-dot"></span>En recherche d'alternance</div>
+        <div class="stage-hl">🎯 En recherche d'une alternance BAC+3</div>
+        <div class="stage-sub">Disponible immédiatement · Paris &amp; Île-de-France</div>
+        <p class="stage-desc">Diplômé TSSR et fort de deux expériences terrain, je suis activement à la recherche d'une alternance BAC+3 dans le domaine de l'IT. Disponible sur Paris et toute l'Île-de-France — support, infrastructure réseau, systèmes ou sécurité. Motivé, rigoureux et opérationnel dès maintenant.</p>
+        <div class="hero-cta">
+          <a href="mailto:lucastramoycand@gmail.com" class="btn btn-p">✉ Envoyer un email</a>
+          <a href="https://www.linkedin.com/in/lucas-tramoy-814201309/" target="_blank" rel="noopener noreferrer" class="btn btn-s">⇗ Mon LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <span class="sec-label">05 / Contact</span>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-h">Me <span>contacter</span></h2>
+        <p class="contact-p">Vous avez une opportunité ? N'hésitez pas à me contacter directement. Je suis disponible immédiatement et opérationnel.</p>
+        <div class="contact-links">
+          <a href="mailto:lucastramoycand@gmail.com" class="clink">
+            <i class="clink-icon">✉</i>
+            <div>
+              <span class="clink-label">Email</span>
+              <span class="clink-val">lucastramoycand@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/lucas-tramoy-814201309/" target="_blank" rel="noopener noreferrer" class="clink">
+            <i class="clink-icon">in</i>
+            <div>
+              <span class="clink-label">LinkedIn</span>
+              <span class="clink-val">linkedin.com/in/lucas-tramoy</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">// Infos clés</div>
+        <div class="info-row">
+          <span class="info-k">Statut</span>
+          <span class="info-v" style="color:var(--p3-green)">En recherche d'alternance BAC+3</span>
+        </div>
+        <div class="info-row">
+          <span class="info-k">Disponibilité</span>
+          <span class="info-v">Immédiate</span>
+        </div>
+        <div class="info-row">
+          <span class="info-k">Zone</span>
+          <span class="info-v">Paris &amp; Île-de-France</span>
+        </div>
+        <div class="info-row">
+          <span class="info-k">Domaines</span>
+          <span class="info-v">Systèmes, Réseaux, IT</span>
+        </div>
+        <div class="info-row">
+          <span class="info-k">Localisation</span>
+          <span class="info-v">Clamart (92)</span>
+        </div>
+        <div class="info-row">
+          <span class="info-k">Formation</span>
+          <span class="info-v">TSSR — COS Formation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="ft">© 2026 Lucas Tramoy — Technicien TSSR</span>
+  <span class="fp">PERSONA · SYSTEM · ACTIVE</span>
+</footer>
+
+<script>
+// Active nav
+const secs = document.querySelectorAll('section[id]');
+const nls = document.querySelectorAll('.nl');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      nls.forEach(l => l.classList.remove('active'));
+      const a = document.querySelector('.nl[href="#' + e.target.id + '"]');
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+secs.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
